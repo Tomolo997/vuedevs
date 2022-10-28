@@ -1,0 +1,75 @@
+{%  extends 'main.html'  %}
+{% load static %}
+{% load markdown_extras %}
+{% block head_content %}
+<title>The reverse job board for Django developers • Django devs</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="The reverse job board for
+    Django developers. Djangodevs gives back the power to independent developers.
+    Let companies reach out to YOU and get your next gig quick.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://djangodevs-bucket.s3.eu-central-1.amazonaws.com/django-logo.jpg">
+<meta property="og:title" content="The reverse job board for Django developers • Django devs">
+<meta property="og:description" content="The reverse job board for
+    Django developers. Djangodevs gives back the power to independent developers.
+    Let companies reach out to YOU and get your next gig quick.">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+{% block content %}
+<div class="inner-container">
+    <div class="main-title">
+        <h1 class="main-title__header-1">
+            The reverse job board for
+            <br>
+            <span class="django-span">Django developers </span> </h1>
+        <p class="main-title__text">Djangodevs gives back the power to independent developers. <br>
+            Let companies reach out to YOU and get your next gig quick.</p>
+
+        <div class="main-title__buttons">
+            <a class="main-title__button" href={% url 'pricing_page' %}>
+                Start Here
+            </a>
+            <a class="main-title__button main-title__button--white" href={% url 'about_page' %}>
+                Learn More
+            </a>
+        </div>
+    </div>
+    <div class="developers-container">
+        <p class="developers-container__sub-title">Django developers available right now</p>
+        {% for developer in developers %}
+        {% if developer.available %}
+        <a href={% url 'developer_page' developer.id %} class=" developer">
+            <div class="developer-left">
+                <div class="developer-image__div">
+                    <img src="{{developer.profile_image}}" class="developer-image" alt="">
+                </div>
+            </div>
+            <div class="available">
+                <img src={% static 'images/icons/check.svg' %} alt="">
+                Available
+            </div>
+            <div class="developer-right">
+                <h5 class="developer-right__title">
+                    {{developer.hero}}
+                </h5>
+                <p class="developer-right__text">
+                    {{developer.bio|unmark}}
+                </p>
+            </div>
+
+        </a>
+
+        {% endif %}
+        {% endfor %}
+        {% if developers|length > 9 %}
+        <div class="see-more-developers">
+            <a class="see-more-developers__button" href={% url 'developers_page' %}>
+                See more developers
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>Hire freelance, contract or full-time django developers</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="Hire freelance, contract or full-time django developers">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Django developers">
+<meta property="og:description" content="Hire freelance, contract or full-time django developers">
+<meta property="og:url" content="https://djangodevs.com/developers">
+{% endblock head_content %}
+
+
+{% block content %}
+<div class="inner-container">
+    <div class="pricing-page">
+        <form action="/create-checkout-session" method="GET">
+            {% csrf_token %}
+            <div class="pricing-page__box">
+
+                <div class="pricing-page__box-price">
+                    <span class="pricing-page__box-price-span">$99</span><span
+                        class="pricing-page__box-price-span pricing-page__box-price-span--small">/month</span>
+                </div>
+                <ul class="pricing-page__box-features">
+                    <li class="pricing-page__box-item--text">
+                        Hire freelance, contract or full-time django developers
+                    </li>
+                    <li class="pricing-page__box-item">
+                        <img src={% static 'images/icons/check-green.svg' %} class="pricing-page__check-icon" alt="">
+                        <span class="pricing-page__box-span">Unlock Developer profiles</span>
+                    </li>
+                    <li class="pricing-page__box-item">
+                        <img src={% static 'images/icons/check-green.svg' %} class="pricing-page__check-icon" alt="">
+                        <span class="pricing-page__box-span">Contact developers</span>
+                    </li>
+                    <li class="pricing-page__box-item">
+                        <img src={% static 'images/icons/check-green.svg' %} class="pricing-page__check-icon" alt="">
+                        <span class="pricing-page__box-span">Email support</span>
+                    </li>
+                    <input type="hidden" name="priceId" value={{priceId}} />
+                    <button type="submit" class="btn pricing-page__box-button">Start</button>
+                </ul>
+            </div>
+        </form>
+
+        <div class="faq">
+
+            <ul class="faq-list">
+                <h2>FAQ</h2>
+                <li class="faq-item">
+                    <h5 class="faq-item__title"> a) Is $99 a month fixed or are there any hidden fees ?</h5>
+                    <p>There are no additional fees or any fees whatsoever. 99$ a month is fixed.</p>
+                </li>
+                <li class="faq-item">
+                    <h5 class="faq-item__title"> b) Does the 99$ a month also include the developer rate ?</h5>
+                    <p>No. With 99$ a month you get the access to djangodevs. You have to pay developer a negotiated
+                        salary.</p>
+                </li>
+                <li class="faq-item">
+                    <h5 class="faq-item__title"> c) Does djangodevs cost anything for developers ?</h5>
+                    <p>No. djangodevs is free for developers.</p>
+                </li>
+                <li class="faq-item">
+                    <h5 class="faq-item__title"> d) Is there a way where you can pay yearly or annualy ?</h5>
+                    <p>Yes. You must contact support@djangodevs.com for further information. Maybe there is a discount
+                        😉</p>
+                </li>
+                <li class="faq-item">
+                    <h5 class="faq-item__title"> e) Is there a way to refund my subscription ?</h5>
+                    <p>Yes.Please contact me on <a href="mailto:support@djangodevs.com">support@djangodevs.com</a>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'js/pricing.js' %}"></script>
+{% endblock content %}

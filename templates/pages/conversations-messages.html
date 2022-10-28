@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>Message</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="Your messages with business or developer">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Message">
+<meta property="og:description" content="Your messages with business or developer">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+
+
+{% block content %}
+
+
+<main class="formPage my-xl conversation__message-container">
+    <br>
+    <form action="" class="form" method="POST">
+        {% csrf_token %}
+        <div class="messages-divs">
+            {% for message in conv_messages %}
+            <div class="conversation__message">
+                {% if message.sender_id != conversation.developer_id.id %}
+                <div class="conversations_message__image-div ">
+                    <img src={{conversation.business_id.imageURL}} class="conversation_message__image" alt="">
+                </div>
+                <div class="conversation_message--message">
+                    {{message}}
+                </div>
+                <div class="conversation_message--created">
+                    {{message.created}}
+                </div>
+                {% else %}
+                <div class="conversations_message__image-div conversations_message__image-div-order-2">
+                    <img src={{conversation.developer_id.imageURL}} class="conversation_message__image" alt="">
+                </div>
+                <div class="conversation_message--message-order-2">
+                    {{message}}
+                </div>
+                <div class="conversation_message--created conversation_message--created-order-2">
+                    {{message.created}}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="form__field form-field-conversation">
+            <label for="formInput#text"></label>
+            {{form.body}}
+            <input name="sender_id" type="hidden" class="hidden" value={{conv_messages}}>
+            <input class="btn btn-sub conversation-submit-button" type="submit" value="Reply">
+        </div>
+        <div class="conversations-new__button-div">
+
+        </div>
+    </form>
+</main>
+<script src="{% static 'js/conversations.js' %}"></script>
+{% endblock content %}

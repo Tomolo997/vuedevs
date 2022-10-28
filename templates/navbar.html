@@ -1,0 +1,90 @@
+{% load static %}
+
+<!-- Header Section -->
+<header class="header">
+    <nav class="container container--narrow">
+        <a href={% url 'index' %} class="header__logo">
+            DjangoDevs
+        </a>
+
+        <nav class="header__nav">
+            <input type="checkbox" id="responsive-menu" />
+            <label for="responsive-menu" class="toggle-menu">
+                <span>Menu</span>
+                <div class="toggle-menu__lines"></div>
+            </label>
+            <ul class="header__menu">
+                <li class="header__menuItem"><a href={% url 'about_page' %}>About</a></li>
+                <li class="header__menuItem"><a href={% url 'pricing_page' %}>Pricing</a></li>
+                <li class="header__menuItem"><a href={% url 'developers_page' %}>Developers</a></li>
+                {% if request.user.is_authenticated %}
+                {% if request.user.developer%}
+                <li class="header__menuItem header__menuItem-mobile">
+                    <a href={% url 'developer_page' request.user.developer.id %}>
+                        My profile
+                    </a>
+                </li>
+                {% endif %}
+                <li class="header__menuItem header__menuItem-mobile"><a
+                        href={% url 'conversations_page' %}>Conversations</a></li>
+                <li class="header__menuItem header__menuItem-mobile"><a href={% url 'edit-developer' %}>Developer</a>
+                </li>
+                <li class="header__menuItem header__menuItem-mobile"><a href={% url 'edit-business' %}>Business</a></li>
+
+                <li class="header__menuItem header__menuItem-mobile"><a href={% url 'logout' %}> Logout</a></li>
+                {% endif %}
+
+
+                {% if request.user.is_authenticated %}
+                <li class="header__menuItem"><button class="button-user-navbar btn btn--sub">
+                        {% if request.user.developer %}
+                        <img class="button-user-navbar__img" src={{request.user.developer.imageURL}} alt="">
+                        {% elif request.user.business %}
+                        <img class="button-user-navbar__img" src={{request.user.business.imageURL}} alt="">
+                        {% else %}
+                        <img class="button-user-navbar__img" src={% static 'images/profiles/user-default.png' %} alt="">
+
+                        {% endif %}
+                    </button>
+                    <ul class="navbar__list-display-none">
+                        {% if request.user.developer%}
+                        <li>
+                            <a class="navbar__link" href={% url 'developer_page' request.user.developer.id %}>
+                                My profile
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a class="navbar__link" href={% url 'conversations_page' %}>
+                                Conversations
+                            </a>
+                        </li>
+                        <li>
+                            <a class="navbar__link" href={% url 'edit-developer' %}>
+                                Developer
+                            </a>
+                        </li>
+                        <li> <a class="navbar__link" href={% url 'edit-business' %}>
+                                Business
+                            </a></li>
+
+                        <li> <a class="navbar__link" href={% url 'logout' %}>
+                                Logout
+                            </a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <div class="header__menuItem header__menuItem-div">
+
+                    <li class="header__menuItem"><a href='{% url 'register' %}?role=business'
+                            class="btn btn--sub btn-hire">Hire top
+                            talent</a></li>
+                    <li class="header__menuItem"><a href={% url 'login' %} class="btn btn--sub btn-login">Log in</a>
+                    </li>
+                </div>
+                {% endif %}
+            </ul>
+        </nav>
+    </nav>
+    <script src="{% static 'js/header.js' %}"></script>
+</header>

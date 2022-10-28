@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+
+{% block head_content %}
+<title>New Conversations</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="Make contact with developer.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="New Conversations">
+<meta property="og:description" content="Make contact with developer.">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+
+{% block content %}
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href="#"><i class="im im-angle-left"></i></a>
+            <br>
+
+            <form class="form" method="POST">
+                {% csrf_token %}
+                <div class="developer-page__image conversations-new__image">
+                    <img class="conversations-new__image-img" src={{developer.imageURL}} alt="">
+                    <p>{{developer.name}}</p>
+                </div>
+                <div class="form__field">
+                    <label for="formInput#text"></label>
+                    {{form}}
+                </div>
+                <div class="conversations-new__button-div">
+
+                    <input class="btn conversations-new__button" type="submit" value="Submit" />
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content %}

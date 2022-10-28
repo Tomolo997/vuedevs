@@ -1,0 +1,18 @@
+{% load static %}
+<footer class="footer">
+    <div>
+        <ul class="footer__list">
+            <li class="footer__item"><a href={% url 'about_page' %}>About</a></li>
+            <li class="footer__item"><a href={% url 'developers_page' %}>Developers</a></li>
+            <li class="footer__item"><a href={% url 'pricing_page' %}>Pricing</a></li>
+        </ul>
+        <div class="footer__social-media">
+            <a href="https://twitter.com/home">
+                <img class="footer__image" src={% static 'images/twitter-blue.svg' %} alt="twitter">
+            </a>
+        </div>
+        <div class="footer__rights">
+            <p class="footer__small-text">© 2022 @tomazOvsenjak. All rights reserved</p>
+        </div>
+    </div>
+</footer>

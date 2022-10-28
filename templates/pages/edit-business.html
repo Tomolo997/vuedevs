@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>Edit your business</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description"
+    content="Edit your business so you can always have the most freshes informations about your business">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Edit your business">
+<meta property="og:description"
+    content="Edit your business so you can always have the most freshes informations about your business">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+{% block content %}
+
+
+<!-- Main Section -->
+<form method="POST" action="" class="main-container" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="inner-container">
+        <div class="create-page">
+            {% if form.errors.profile_image %}
+            <div class="alert alert  alert--error">File too large
+                <div class="alert__close">x</div>
+            </div>
+            {% endif %}
+            <h3 class="create-page__title">Edit Business</h3>
+            <h3 class="create-page__title--small create-page__title--small-margin">Profile</h3>
+            <h3 class="create-page__title--small create-page__title--very-small">Basic information about your business
+            </h3>
+            <div class="create-page__container">
+
+                <div class="create-developer__containter">
+                    <div class="create-developer__image">
+                        {% if form.errors.profile_image %}
+                        <img id="pic" class="create-developer__image-img"
+                            src={% static 'images/profiles/too-large.jpeg' %} alt="User Avatar" />
+                        {% else %}
+                        <img id="pic" class="create-developer__image-img" src={{business.imageURL}} alt="User Avatar" />
+                        {% endif %}
+
+                    </div>
+                    <label class="custom-file-upload">
+                        Upload Business logo
+                        {{userForm.profile_image}}
+                    </label>
+                    <div class="error-file error-not-visible">Error! file too large, file should not exceed 2 MB</div>
+                    <div class="create-developer__field create-developer__field-first">
+                        <label for="name">Name</label>
+                        {{form.name}}
+                    </div>
+                    <div class="create-developer__field">
+                        <label for="bio">Bio</label>
+                        {{form.bio}}
+                        <div class="markdown-wrapper">
+                            <p>You can use markdown
+                                {% include "../components/markdown-tooltip.html" %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="create-developer__field">
+                        <label for="website">Website</label>
+                        {{form.website}}
+                        <p>Link to your company website</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn create-developer__button create-developer__button-real">Edit
+            Business</button>
+    </div>
+</form>
+<script src="{% static 'js/new-developer.js' %}"></script>
+<script src="{% static 'js/markdown.js' %}"></script>
+{% endblock content %}

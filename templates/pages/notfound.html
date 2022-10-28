@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block head_content %}
+<title>404 Error</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="404 Error">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404 Error">
+<meta property="og:description" content="404 Error">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+{% block content %}
+<div class="inner-container">
+    <div class="inbox">
+        404 ERROR. <br>
+        Sorry, but this page is not found :(
+        <a style="margin-top:10rem;" href="/">GO HOME</a>
+    </div>
+</div>
+{% endblock content %}

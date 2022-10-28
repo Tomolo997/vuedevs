@@ -1,0 +1,275 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>Create new developer</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="Create your new developer profile">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Create new developer">
+<meta property="og:description" content="Create your new developer profile">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+{% block content %}
+
+<!-- Main Section -->
+<form method="POST" action="" class="main-container" id="new-developer-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="inner-container">
+        <div class="create-page">
+            {% if form.errors.profile_image %}
+            <div class="alert alert  alert--error">File too large
+                <div class="alert__close">x</div>
+            </div>
+            {% endif %}
+            <h3 class="create-page__title">Create a new Developer</h3>
+            <h3 class="create-page__title--small create-page__title--small-margin">Profile</h3>
+            <h3 class="create-page__title--small create-page__title--very-small">This will be public information about
+                your profile</h3>
+            <div class="create-page__container">
+
+                <div class="create-developer__containter">
+                    <div class="create-developer__image">
+                        {% if form.errors.profile_image %}
+                        <img id="pic" class="create-developer__image-img"
+                            src={% static 'images/profiles/too-large.jpeg' %} alt="User Avatar" />
+                        {% elif not request.user.developer %}
+                        <img id="pic" class="create-developer__image-img"
+                            src={% static 'images/profiles/user-default.png' %} alt="User Avatar" />
+                        {% else %}
+                        <img id="pic" class="create-developer__image-img" src={{ developer.imageURL}}
+                            alt="User Avatar" />
+                        {% endif %}
+                    </div>
+                    <label class="custom-file-upload">
+                        Upload avatar
+                        {{form.profile_image}}
+                    </label>
+                    <div class="error-file error-not-visible">Error! file too large, file should not exceed 2 MB</div>
+                    <div class="create-developer__field create-developer__field-first">
+                        <label for="name">Name</label>
+                        {{form.name}}
+                        <p>This information will only available to businesses</p>
+                    </div>
+                    <div class="create-developer__field">
+                        <label for="hero">Hero</label>
+                        {{form.hero}}
+                        <p>This is a quick summary of you as a developer</p>
+                    </div>
+                    <div class="create-developer__field">
+                        <label for="bio">Bio</label>
+                        {{form.bio}}
+                        <div class="markdown-wrapper">
+                            <p>You can use markdown
+                                {% include "../components/markdown-tooltip.html" %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="create-developer__field--location">
+                        <div class="create-developer__field--location-div">
+                            <label for="country">Country</label>
+                            {{form.country}}
+                        </div>
+                        <div class="create-developer__field--location-div">
+                            <label for="city">City</label>
+                            {{form.city}}
+                        </div>
+                        <div class="create-developer__field--location-div">
+                            <label for="timezone">Timezone</label>
+                            {{form.timezone}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="create-page__title--small create-page__title--small-margin">Developer specifics</h3>
+            <h3 class="create-page__title--small create-page__title--very-small">Select your prefferences</h3>
+            <div class="create-page__container">
+
+                <div class="create-developer__containter">
+                    <div class="developer-specifics">
+                        <div class="developer-specifics__cell">
+                            <h3>Availability</h3>
+                            <fieldset>
+                                <div class="developer-specifics__cell--div">
+                                    <label class="label-container" for="available">
+                                        <input type="radio" id="available" name="availability" value="available"
+                                            checked>
+                                        Available
+                                        <br>
+                                        <p>Available for work, seen on developers page</p>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="developer-specifics__cell--div">
+                                    <label class="label-container" for="open">
+                                        <input type="radio" id="open" name="availability" value="open">
+                                        Open
+                                        <br>
+                                        <p>Available for work, seen on only by busineeses</p>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="developer-specifics__cell--div">
+                                    <label class="label-container" for="not_available">
+                                        <input type="radio" id="not_available" name="availability"
+                                            value="not_available">
+                                        Not available
+                                        <br>
+                                        <p>Not available and cannot be seen</p>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="developer-specifics__cell">
+                            <h3>Role type</h3>
+                            <p class="error-role-type-message"> * Please select atleast one of the role levels</p>
+                            <fieldset>
+                                <div class="developer-specifics__cell--div">
+                                    <label class="label-container" for="part_time_contract">
+                                        <input type="checkbox" class="input_role-type" id="part_time_contract"
+                                            name="role_type" value="part_time_contract" checked>
+                                        Part time Contract
+                                        <br>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="developer-specifics__cell--div">
+                                    <label class="label-container" for="full_time_contract">
+                                        <input type="checkbox" id="full_time_contract" class="input_role-type"
+                                            name="role_type" value="full_time_contract">
+                                        Full time Contract
+                                        <br>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="developer-specifics__cell--div">
+                                    <label class="label-container" for="full_time_job">
+                                        <input type="checkbox" id="full_time_job" class="input_role-type"
+                                            name="role_type" value="full_time_job">
+                                        Full time job
+                                        <br>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div>
+                            <div class="developer-specifics--available-on">
+                                <h3>Available for (pay rate an hour)</h3>
+
+
+                                <div class="pay_rate-removal">
+                                    <p>Pay rate was removed, in my opinion the compensation should be discussed only
+                                        after the details of a project or job are known.</p>
+                                    <div class="developer-specifics--pay-rate">
+                                        <input disabled type="text"><span
+                                            class="developer-specifics--pay-rate-dollar">$</span> <span
+                                            class="developer-specifics--pay-rate-slash">/</span>
+                                        <span class="developer-specifics--pay-rate-slash">hour</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="developer-specifics__cell">
+                                <h3>Role level</h3>
+                                <p class="error-role-level-message"> * Please select atleast one of the role levels</p>
+                                <fieldset>
+                                    <div class="developer-specifics__cell--div">
+                                        <label class="label-container" for="junior">
+                                            <input type="checkbox" class="input_role-level" id="junior"
+                                                name="role_level" value="junior" checked>
+                                            Junior
+                                            <br>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="developer-specifics__cell--div">
+                                        <label class="label-container" for="mid">
+                                            <input type="checkbox" id="mid" class="input_role-level" name="role_level"
+                                                value="mid">
+                                            Mid
+                                            <br>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="developer-specifics__cell--div">
+                                        <label class="label-container" for="senior">
+                                            <input type="checkbox" id="senior" class="input_role-level"
+                                                name="role_level" value="senior">
+                                            Senior
+                                            <br>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="developer-specifics__cell--div">
+                                        <label class="label-container" for="principal">
+                                            <input type="checkbox" id="principal" class="input_role-level"
+                                                name="role_level" value="principal">
+                                            Principal
+                                            <br>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                    <div class="developer-specifics__cell--div">
+                                        <label class="label-container" for="c_level">
+                                            <input type="checkbox" id="c_level" class="input_role-level"
+                                                name="role_level" value="c_level">
+                                            C level
+                                            <br>
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 class="create-page__title--small create-page__title--small-margin">Social media
+            </h3>
+            <h3 class="create-page__title--small create-page__title--very-small"> Where can people see your work. Only
+                available to paid busineeses</h3>
+            <div class="create-page__container">
+                <div class="create-developer__containter">
+                    <div class="create-developer__field create-developer__field--social-media">
+                        <label for="twitter">Twitter</label>
+                        {{form.social_twitter}}
+                    </div>
+                    <div class="create-developer__field create-developer__field--social-media">
+                        <label for="linkedin">Linkedin</label>
+                        {{form.social_linkedin}}
+
+                    </div>
+                    <div class="create-developer__field create-developer__field--social-media">
+                        <label for="github">Github</label>
+                        {{form.social_github}}
+
+                    </div>
+                    <div class="create-developer__field create-developer__field--social-media">
+                        <label for="website">Website</label>
+                        {{form.social_website}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn create-developer__button create-developer__button-real">Create
+            developer</button>
+    </div>
+</form>
+
+<script src="{% static 'js/new-developer.js' %}"></script>
+<script src="{% static 'js/markdown.js' %}"></script>
+<script src="{% static 'js/checkbox-must.js' %}"></script>
+
+{% endblock content %}

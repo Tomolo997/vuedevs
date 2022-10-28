@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>About django devs</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description"
+    content="Django is one of the best and most popular fullstack frameworks in the world. Famous companies such as Youtube, Spotify, Instagram use django. And Django devs is here to give BACK the power to the developers.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About django devs">
+<meta property="og:description"
+    content="Django is one of the best and most popular fullstack frameworks in the world. Famous companies such as Youtube, Spotify, Instagram use django. And Django devs is here to give BACK the power to the developers.">
+<meta property="og:url" content="https://djangodevs.com/about">
+{% endblock head_content %}
+
+
+{% block content %}
+<div class="inner-container">
+    <div class="about-page__container">
+        <div class="about-page__image">
+            <img src={% static 'images/ovsenjak.jpeg' %} class="developer-image" alt="">
+        </div>
+        <div class="about-page__text">
+            <h3>About me </h3>
+            <p>I'm a fullstack developer with experience in freelance. My intention is to get django developers more
+                power
+                in their search of a fulltime job, freelance gig or a part-time contract</p>
+            <div class="about-page__divider"></div>
+            <h3>About project</h3>
+            <p>Django is one of the best and most popular fullstack frameworks in the world. Famous companies such as
+                Youtube, Spotify, Instagram use
+                django. And Django devs is here to give BACK the power to the developers.</p>
+            <br>
+            <p>Freelance work is a rollercoaster. There are highs and lows, somedays you get dozen requests and the
+                other
+                days you struggle to find work.</p>
+            <br>
+            <p>Job boards are for the full-time folks. Freelancers and contractors rarely find a job on the job boards.
+                So
+                with this intention we have created Django devs.</p>
+            <br>
+            <p>Let companies reach out to you and get leads more easily.</p>
+            <br>
+            <p>This project was partly insipired by railsdevs.com</p>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

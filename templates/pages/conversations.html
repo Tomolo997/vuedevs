@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>Conversations</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="Your conversations with businesses or developers">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Conversations">
+<meta property="og:description" content="Your conversations with businesses or developers">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+{% block content %}
+<div class="inner-container">
+
+    <!-- Main Section -->
+    <main class="inbox inbox-conversations">
+        {% if conversations %}
+        <div class="content-box">
+            <h3 class="inbox__title">Messages</h3>
+            <ul class="messages">
+                <li class="message message__legend--table-div">
+                    <a>
+                        <span class="message__author message__legend--table ">You
+                        </span>
+                        <span class="message__author message__legend--table">Receipter</span>
+                        <span class="message__subject message__legend--table">Last Message</span>
+                        <span class="message__date message__legend--table">Date of last message</span>
+                    </a>
+                </li>
+                {% for conv in conversations %}
+                <li class="message message--unread">
+                    <a href={% url 'conversations_message' conv.id%}>
+                        <span class="message__author">{% if user.developer.id == conv.developer_id.id %}Developer
+                            {% else %} Business {% endif %}</span>
+                        <span
+                            class="message__author">{% if user.developer.id == conv.developer_id.id %}{{conv.business_id}}
+                            {% else %} {{conv.developer_id}} {% endif %}</span>
+                        <span class="message__subject"> {{conv.message.body}}</span>
+                        <span class="message__date"> {{conv.message.created}}</span>
+                    </a>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+        {% endif %}
+        {% if not conversations %}
+        You have no conversations
+        {% endif %}
+    </main>
+</div>
+
+{% endblock content %}

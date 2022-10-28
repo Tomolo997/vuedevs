@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>New business or new developer</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description"
+    content="Choose what you wnat to create, do you want to hire developers or do you want to get hired">
+<meta property="og:type" content="website">
+<meta property="og:title" content="New business or new developer">
+<meta property="og:description"
+    content="Choose what you wnat to create, do you want to hire developers or do you want to get hired">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+{% block content %}
+
+
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="inner-container">
+        <div class="create-page">
+            <h3 class="create-page__title">Create a new Developer or become an active Business</h3>
+            <div class="create-page__container">
+                <a href={% url 'create-developer' %} class="create-page__link">
+
+                    <div class="create-page__create">
+                        <div class="create-page__icon">
+                            <img src={% static 'images/icons/user-plus.svg' %} alt="">
+                        </div>
+                        <h5 class="create-page__inner-title">Create Developer
+                            <h5 />
+                            <div>Get Hired</div>
+                    </div>
+                </a>
+                <a href={% url 'create-business' %} class="create-page__link">
+                    <div class="create-page__create">
+                        <div class="create-page__icon">
+                            <img src={% static 'images/icons/briefcase.svg' %} alt="">
+                        </div>
+                        <h5 class="create-page__inner-title">Create Business
+                            <h5 />
+                            <div>Hire</div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

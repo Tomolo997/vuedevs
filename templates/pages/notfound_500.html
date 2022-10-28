@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block head_content %}
+<title>Error 500</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="Error 500, please refresh or go home">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Error 500">
+<meta property="og:description" content="Error 500, please refresh or go home">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+{% block content %}
+<div class="inner-container">
+    <div class="inbox">
+        Sorry, but this page is not found :(
+        <a style="margin-top:10rem;" href="/">GO HOME</a>
+    </div>
+</div>
+{% endblock content %}

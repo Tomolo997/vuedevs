@@ -1,0 +1,154 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load markdown_extras %}
+{% block head_content %}
+<title>The reverse job board for Django developers • Django devs</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="The reverse job board for
+Django developers. Djangodevs gives back the power to independent developers.
+Let companies reach out to YOU and get your next gig quick.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The reverse job board for Django developers • Django devs">
+<meta property="og:description" content="The reverse job board for
+Django developers. Djangodevs gives back the power to independent developers.
+Let companies reach out to YOU and get your next gig quick.">
+<meta property="og:url" content="https://djangodevs.com/">
+{% endblock head_content %}
+
+{% block content %}
+<div class="developer-page">
+    <div class="developer-page__column developer-page__column-1">
+        <div class="developer-page__hire-image">
+            <div class="developer-page__image">
+                <img src={{developer.imageURL }} alt="">
+            </div>
+            <div class="developer-page__location-div">
+                <div class="developer-page__location">
+                    <img src={% static 'images/icons/map-pin.svg' %} class="developer-page__map-pin" alt="">
+                    <p class="developer-page__location-text">{{developer.country}}</p>
+                </div>
+                <div class="developer-page__location">
+                    <img src={% static 'images/icons/clock.svg' %} class="developer-page__map-pin" alt="">
+                    <p class="developer-page__location-text">{{developer.city}} <br> GMT {{developer.timezone}}</p>
+                </div>
+
+
+            </div>
+            {% if developer.user == user %}
+            <a href={% url 'edit-developer' %} class="btn button-hire">Edit me</a>
+            {% else %}
+            <a href={% if request.user.business.is_payed and is_there_customer %}{% url 'conversations_new_page' developer.id %}
+                {% elif not request.user.business%}{% url 'create-business' %} {% else %} {% url 'pricing_page' %}
+                {% endif %} class="btn button-hire">Hire me</a>
+            {% endif %}
+
+        </div>
+
+        <div class="developer-page__social">
+            {% if request.user.business.is_payed and is_there_customer or developer.user == user %}
+            <ul class="developer-page__list">
+                {% if developer.social_twitter %}
+                <li class="developer-page__item"><a class="developer-page__link" target="_blank"
+                        href={{developer.social_twitter}}>
+                        <img src={% static 'images/icons/twitter.svg' %} class="developer-page__icon" alt="">
+                        <span class="developer-page__span">
+                            Twitter
+                        </span>
+                    </a></li>
+                {% endif %}
+                {% if developer.social_linkedin %}
+                <li class="developer-page__item"><a class="developer-page__link" target="_blank"
+                        href={{developer.social_linkedin}}>
+                        <img src={% static 'images/icons/linkedin.svg' %} alt="" class="developer-page__icon">
+                        <span class="developer-page__span">
+                            LinkedIn
+                        </span>
+                    </a></li>
+                {% endif %}
+                {% if developer.social_website %}
+                <li class="developer-page__item"><a class="developer-page__link" target="_blank"
+                        href={{developer.social_website}}>
+                        <img src={% static 'images/icons/globe.svg' %} alt="" class="developer-page__icon">
+                        <span class="developer-page__span">
+                            Website
+                        </span>
+                    </a></li>
+                {% endif %}
+                {% if developer.social_github %}
+                <li class="developer-page__item"><a class="developer-page__link" target="_blank"
+                        href={{developer.social_github}}>
+                        <img src={% static 'images/icons/github.svg' %} alt="" class="developer-page__icon">
+                        <span class="developer-page__span">
+                            Github
+                        </span>
+                    </a></li>
+                {% endif %}
+
+            </ul>
+            {% else %}
+            <a href={% if request.user.business.is_payed and is_there_customer  %}{% url 'conversations_new_page' developer.id %}
+                {% elif not request.user.business%}{% url 'create-business' %} {% else %} {% url 'pricing_page' %}
+                {% endif %} class="social--link">
+                <div class="developer-page__list developer-page__list--locked">
+                    <img class="lock-icon" src={% static 'images/icons/lock.svg' %} />
+                    <p class="locked-section-p"> To see
+                        private information,
+                        <br>
+                        please upgrade</p>
+
+
+                </div>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="developer-page__column developer-page__column-2">
+        <h3 class="developer-page__title">
+            {{developer.hero}}
+        </h3>
+        <div class="developer-page__text">
+            {{developer.bio|convert_markdown|safe}}
+        </div>
+    </div>
+    <div class="developer-page__column developer-page__column-3">
+        <div class="developer-page__info-box">
+            <h5 class="developer-page__info-box__title">Looking for</h5>
+            <ul class="developer-page__info-box__list">
+                {% for role in role_type %}
+                <li class="developer-page__info-box__item">
+                    <img src={% static 'images/icons/check.svg' %} class="developer-page__icon-check" alt="">
+                    <span class="developer-page__icon-text">{{role}}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="developer-page__info-box">
+            <h5 class="developer-page__info-box__title">My seniority</h5>
+            <ul class="developer-page__info-box__list">
+                {% for level in role_level %}
+                <li class="developer-page__info-box__item developer-page__info-box__item--seniority">
+                    <img src={% static 'images/icons/check.svg' %} class="developer-page__icon-check" alt="">
+                    <span class="developer-page__icon-text">{{level|title}}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="developer-page__info-box">
+            <h5 class="developer-page__info-box__title">Availability</h5>
+            <ul class="developer-page__info-box__list">
+                {% for item in availability %}
+                {% if item == 'available' or item == 'open' %}
+                <li class="developer-page__info-box__item">
+                    <img src={% static 'images/icons/check.svg' %} class="developer-page__icon-check" alt="">
+                    <span class="developer-page__icon-text">{{item|title}}</span>
+                </li>
+                <li class="developer-page__info-box__item">
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,304 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load markdown_extras %}
+
+{% block head_content %}
+<title>Django Developers</title>
+<meta name="author" content="Tomaz Ovsenjak">
+<meta name="keywords" content="djangodevs, django, django developers, django devs">
+<meta name="description" content="Hire the best
+    Django developers
+    Search through our great developer community.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Django developers">
+<meta property="og:description" content="Hire the best
+    Django developers
+    Search through our great developer community.">
+<meta property="og:url" content="https://djangodevs.com/developers">
+{% endblock head_content %}
+
+{% block content %}
+<div class="inner-container inner-container--developers">
+    <div class="main-title">
+        <h1 class="main-title__header-1">
+            Hire the best
+            <br>
+            <span class="django-span">Django developers </span> </h1>
+        <p class="main-title__text">Search through our great developer community.</p>
+    </div>
+    <div class="developers-container developers-page__wrapper">
+        <form id='filterForm' method="GET" class="developers-page--filter">
+            <div class="developers-page__filter-field">
+                <fieldset>
+                    <legend class="legend-seniority">
+                        <span>
+
+                            Seniority level
+                        </span>
+                        <span class="field-set-seniority-toggle"> <img src={% static 'images/icons/chevron-down.svg' %}
+                                class="seniority-chevron seniority-chevron-down" alt=""> </span>
+                    </legend>
+                    <div class="seniority-dropdown">
+
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="junior" id="junior"
+                                name="role_level">
+                            <label class="developers-page__filter-label" for="junior">Junior</label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="mid" id="middle"
+                                name="role_level">
+                            <label class="developers-page__filter-label" for="middle">Middle</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="senior" id="senior"
+                                name="role_level">
+                            <label class="developers-page__filter-label" for="senior">Senior</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="principal"
+                                id="principal" name="role_level">
+                            <label class="developers-page__filter-label" for="principal">Principal</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <div class="divider"></div>
+            <div class="developers-page__filter-field">
+                <fieldset>
+                    <legend class="legend-work">
+                        <span>
+                            Work preference
+                        </span>
+                        <span class="field-set-work-toggle"> <img src={% static 'images/icons/chevron-down.svg' %}
+                                class="work-chevron work-chevron-down" alt=""> </span>
+                    </legend>
+                    <div class="work-dropdown">
+
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="part_time_contract"
+                                id="part_time_contract" name="role_type">
+                            <label class="developers-page__filter-label" for="part_time_contract">Part time
+                                Contract</label>
+                        </div>
+
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="part_time_job"
+                                id="part_time_job" name="role_type">
+                            <label class="developers-page__filter-label" for="part_time_job">Part time job</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="full_time_job"
+                                id="full_time_job" name="role_type">
+                            <label class="developers-page__filter-label" for="full_time_job">Full time job</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+            <div class="divider"></div>
+            <div class="developers-page__filter-field">
+                <fieldset class="field-set-timezone">
+                    <legend class="legend-timezone">
+                        <span>
+                            Timezone
+                        </span>
+                        <span class="field-set-timezone-toggle">
+                            <img src={% static 'images/icons/chevron-down.svg' %}
+                                class="timezone-chevron timezone-chevron-down" alt="">
+                        </span>
+                    </legend>
+                    <div class="timezone-dropdown">
+                        <div class="item-dropdown">
+                            <input type="checkbox" class="developers-page__filter-input" value="-12" id="GMT-12"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-12">GMT-12</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-11" id="GMT-11"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-11">GMT-11</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-10" id="GMT-10"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-10">GMT-10</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-09" id="GMT-9"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-9">GMT-9</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-08" id="GMT-8"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-8">GMT-8</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-07" id="GMT-7"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-7">GMT-7</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-06" id="GMT-6"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-6">GMT-6</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-05" id="GMT-5"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-5">GMT-5</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-04" id="GMT-4"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-4">GMT-4</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-03" id="GMT-3"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-3">GMT-3</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-02" id="GMT-2"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-2">GMT-2</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="-01" id="GMT-1"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT-1">GMT-1</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="0" id="GMT"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT">GMT</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="1" id="GMT1"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT1">GMT+1</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="2" id="GMT2"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT2">GMT+2</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="3" id="GMT3"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT3">GMT+3</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="4" id="GMT4"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT4">GMT+4</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="5" id="GMT5"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT5">GMT+5</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="6" id="GMT6"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT6">GMT+6</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="7" id="GMT7"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT7">GMT+7</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="8" id="GMT8"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT8">GMT+8</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="9" id="GMT9"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT9">GMT+9</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="10" id="GMT10"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT10">GMT+10</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="11" id="GMT11"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT11">GMT+11</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="developers-page__filter-input" value="12" id="GMT12"
+                                name="timezone">
+                            <label class="developers-page__filter-label" for="GMT12">GMT+12</label>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+
+            </div>
+
+            <div class="filter-buttons">
+                <button type="submit" class="btn button-filter">Apply</button>
+                <button class="btn button-filter-clear">Clear</button>
+            </div>
+        </form>
+        <div class="developers__page--container">
+            <p class="developers__page--searching">There are <span
+                    class="developers__page--searching-bolded">{{allDevs}}</span> developers searcing for
+                jobs
+                right now</p>
+            <div class="infinite-container">
+                {% for developer in developers %}
+
+                <a href={% url 'developer_page' developer.id %}
+                    class="developer infinite-item developers-page__developer">
+                    <div class="developer-left">
+                        <div class="developer-image__div">
+                            <img src={{developer.profile_image}} class="developer-image" alt="">
+                        </div>
+                    </div>
+                    <div class="available">
+                        <img src={% static 'images/icons/check.svg' %} alt="">
+                        Available
+                    </div>
+                    <div class="developer-right">
+                        <h5 class="developer-right__title">
+                            {{developer.hero}}
+                        </h5>
+                        <p class="developer-right__text">
+                            {{developer.bio|unmark}}
+                        </p>
+                    </div>
+                </a>
+                {% endfor %}
+
+            </div>
+            {% if developers.has_next %}
+            <a class="infinite-more-link" href="?page={{ developers.next_page_number }}">
+                <div class="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+<script defer src="{% static 'js/developers.js' %}"></script>
+<script defer>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0]
+    });
+</script>
+{% endblock content %}

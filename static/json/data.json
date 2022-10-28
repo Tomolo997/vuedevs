@@ -1,0 +1,17 @@
+[
+  {
+    "title": "The best there is in django developenet",
+    "id": 1,
+    "bio": "Tech, nature and real estate enthusiast with more than 3 years experience in web development with Ruby on Rails in the fintech industry and small side projects. I am a team player, reliable, fast learner and open to help whenever I can. My"
+  },
+  {
+    "title": "The best there is in Python developenet",
+    "id": 2,
+    "bio": "Tech, nature and real estate enthusiast with more than 3 years experience in web development with Ruby on Rails in the fintech industry and small side projects. I am a team player, reliable, fast learner and open to help whenever I can. My"
+  },
+  {
+    "title": "The best there is in Rails deve developenet",
+    "id": 3,
+    "bio": "Tech, nature and real estate enthusiast with more than 3 years experience in web development with Ruby on Rails in the fintech industry and small side projects. I am a team player, reliable, fast learner and open to help whenever I can. My"
+  }
+]
